@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le Coin des Animaux - FLE A1</title>
     <style>
+        /* 🎨 يمكنك تغيير الألوان من هنا بسهولة في النهاية */
         :root {
             --soft-blush: #FFDBDA;   
             --old-rose: #DB7F8E;     
@@ -17,6 +18,7 @@
         }
 
         *, *::before, *::after {
+            box-shadow: none;
             box-sizing: border-box;
         }
 
@@ -41,7 +43,6 @@
             color: var(--soft-blush);
             border-radius: 16px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgb(96 77 83 / 0.15);
         }
 
         header h1 { margin: 0; font-size: 2.3rem; }
@@ -66,7 +67,6 @@
         .dot.active {
             background-color: var(--old-rose);
             transform: scale(1.2);
-            box-shadow: 0 0 8px var(--old-rose);
         }
 
         .page {
@@ -80,9 +80,7 @@
             min-height: 450px;
         }
 
-        .page.active {
-            display: block;
-        }
+        .page.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -97,19 +95,32 @@
             font-size: 1.6rem;
         }
 
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; }
-        .form-group input {
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: bold; font-size: 0.95rem; }
+        
+        input[type="text"], input[type="number"], select {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 2px solid var(--pale-slate);
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--taupe-grey);
+            background: #fff;
         }
-        .form-group input:focus { border-color: var(--old-rose); outline: none; }
+        
+        input:focus, select:focus { border-color: var(--old-rose); outline: none; }
 
-        /* شبكة المهارات (المربعات الأربعة المتفاعلة الآن) */
+        /* الأنشطة التفاعلية الفراغات المنسدلة inline */
+        .inline-blank, .inline-select {
+            width: 120px !important;
+            display: inline-block !important;
+            padding: 4px 8px !important;
+            margin: 0 5px;
+            border: 1px solid var(--cool-steel) !important;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
         .grid-4 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -131,12 +142,10 @@
             transform: translateY(-5px);
             border-color: var(--old-rose);
             background-color: #ffffff;
-            box-shadow: 0 6px 12px rgb(219 127 142 / 0.15);
         }
 
         .skill-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
 
-        /* ديزاين جديد لصفحة نطق أسماء الحيوانات (بطاقات دائرية ناعمة وعصرية) */
         .circle-grid {
             display: flex;
             justify-content: center;
@@ -149,36 +158,31 @@
             background: #ffffff;
             border: 3px solid var(--pale-slate);
             border-radius: 50%;
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
         }
 
         .animal-circle-card:hover {
             border-color: var(--old-rose);
-            transform: scale(1.08) rotate(3deg);
-            box-shadow: 0 8px 16px rgb(219 127 142 / 0.2);
+            transform: scale(1.05);
         }
 
-        .animal-circle-emoji { font-size: 2.8rem; margin-bottom: 2px; }
-        .animal-circle-name { font-size: 0.95rem; font-weight: bold; color: var(--taupe-grey); }
+        .animal-circle-emoji { font-size: 2.5rem; margin-bottom: 2px; }
+        .animal-circle-name { font-size: 0.9rem; font-weight: bold; }
 
-        /* تنسيقات الأسئلة */
         .quiz-container {
-            margin-top: 25px;
+            margin-top: 20px;
             padding-bottom: 15px;
             border-bottom: 1px dashed var(--pale-slate);
         }
-        
-        .quiz-container:last-of-type { border-bottom: none; }
 
-        .quiz-question { font-size: 1.1rem; color: var(--taupe-grey); margin-bottom: 12px; }
+        .quiz-question { font-size: 1.05rem; color: var(--taupe-grey); margin-bottom: 10px; }
 
         .quiz-option {
             display: block;
@@ -186,12 +190,12 @@
             text-align: left;
             background: var(--bg);
             color: var(--taupe-grey);
-            padding: 12px;
-            margin: 8px 0;
+            padding: 10px 14px;
+            margin: 6px 0;
             border: 1px solid var(--pale-slate);
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.2s;
         }
 
@@ -200,7 +204,7 @@
             border-color: var(--old-rose);
         }
 
-        button {
+        button.btn-primary {
             background-color: var(--old-rose);
             color: white;
             border: none;
@@ -209,23 +213,32 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 0.95rem;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        button:hover { background-color: #c96b7a; transform: scale(1.02); }
+        button.btn-primary:hover { background-color: #c96b7a; }
 
-        /* منطقة النص القرائي */
         .reading-box {
-            background: #ffffff;
+            background: var(--bg);
             border: 2px solid var(--soft-blush);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 25px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
+        }
+
+        .matching-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: var(--bg);
+            border-radius: 8px;
+            border: 1px solid var(--pale-slate);
         }
 
         .matching-container { display: flex; justify-content: space-between; margin-top: 20px; gap: 20px; }
@@ -239,14 +252,19 @@
             text-align: center;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.2s;
         }
         .match-item.selected { background-color: var(--soft-blush); border-color: var(--old-rose); }
 
         .controls { display: flex; justify-content: space-between; margin-top: 25px; }
         .score-board { text-align: center; margin-top: 20px; font-size: 1.2rem; font-weight: bold; }
         .score-value { background: var(--taupe-grey); color: var(--soft-blush); padding: 4px 14px; border-radius: 15px; }
-        .feedback-msg { font-weight: bold; margin-top: 8px; min-height: 20px; font-size: 0.95rem; }
+        .feedback-msg { font-weight: bold; margin-top: 6px; min-height: 20px; font-size: 0.95rem; }
+        
+        .row-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
     </style>
 </head>
 <body>
@@ -254,7 +272,7 @@
 <div class="container">
     <header>
         <h1>Le Coin des Animaux 🐾</h1>
-        <p>Niveau FLE A1 - Module Complet de Compétences</p>
+        <p>Niveau FLE A1 - Module Interactif Universitaire</p>
     </header>
 
     <div class="navigation-dots" id="dots-container">
@@ -284,14 +302,14 @@
                 <input type="number" id="student-id" placeholder="Ex: 442001234">
             </div>
             <div style="text-align: center; margin-top: 30px;">
-                <button onclick="changePage(1)">Commencer ➡</button>
+                <button class="btn-primary" onclick="changePage(1)">Commencer ➡</button>
             </div>
         </div>
     </div>
 
     <div class="page" id="page-1">
         <h2 class="page-title">Les Compétences Linguistiques</h2>
-        <p>Cliquez sur une compétence pour accéder directement aux activités dédiées :</p>
+        <p>Cliquez sur une compétence для الاستمرار والانتقال للقسم المخصص :</p>
         <div class="grid-4">
             <div class="skill-card" onclick="goToPage(3)">
                 <span class="skill-icon">🎧</span>
@@ -301,24 +319,24 @@
             <div class="skill-card" onclick="goToPage(4)">
                 <span class="skill-icon">📖</span>
                 <h3>Compréhension Écrite</h3>
-                <p>Lire un texte et analyser</p>
+                <p>Lire, remplir les blancs et associer</p>
             </div>
             <div class="skill-card" onclick="goToPage(2)">
                 <span class="skill-icon">🗣️</span>
                 <h3>Production Orale</h3>
-                <p>Pratiquer la prononciation</p>
+                <p>Pratiquer la prononciation et s'enregistrer</p>
             </div>
             <div class="skill-card" onclick="goToPage(5)">
                 <span class="skill-icon">✍️</span>
                 <h3>Production Écrite</h3>
-                <p>Écrire et formuler des phrases</p>
+                <p>Remplir la fiche d'adoption</p>
             </div>
         </div>
     </div>
 
     <div class="page" id="page-2">
-        <h2 class="page-title">Vocabulaire & Prononciation</h2>
-        <p>Cliquez sur chaque cercle pour écouter et répéter la prononciation correcte :</p>
+        <h2 class="page-title">Production Orale</h2>
+        <p>1. Cliquez sur chaque cercle pour écouter et répéter :</p>
         <div class="circle-grid">
             <div class="animal-circle-card" onclick="speakFrench('Le chat')">
                 <span class="animal-circle-emoji">🐈‍⬛</span>
@@ -337,23 +355,31 @@
                 <span class="animal-circle-name">Le lapin</span>
             </div>
         </div>
+
+        <p style="margin-top: 30px;">2. Présentez votre animal préféré à voix haute :</p>
+        <div style="text-align: center; background: var(--bg); padding: 20px; border-radius: 12px; border: 1px dashed var(--old-rose);">
+            <span style="font-size: 2.5rem; display:block; margin-bottom: 10px;">🎙️</span>
+            <button class="btn-primary" onclick="alert('Simulation d\'enregistrement démarrée... Parlez maintenant !')">Commencer l'enregistrement</button>
+            <div style="margin-top: 15px; font-size: 0.85rem; color: var(--cool-steel);">
+                Utilisez les expressions : <em>Il s'appelle... / Il a... ans / Il aime manger...</em>
+            </div>
+        </div>
     </div>
 
     <div class="page" id="page-3">
         <h2 class="page-title">Compréhension Orale</h2>
-        <p>Écoutez attentivement l'audio en cliquant sur le bouton ci-dessous, puis répondez aux 5 questions :</p>
+        <p>Écoutez attentivement l'audio, puis répondez aux 5 questions :</p>
         
         <div style="text-align: center; margin: 25px 0;">
-            <button onclick="speakFrench('Bonjour! Je m\'appelle Thomas. J\'ai trois animaux à la maison. J\'ai un petit chat noir, un grand chien blanc, et un joli lapin gris qui s\'appelle Max. J\'aime beaucoup mes animaux.')" style="background-color: var(--taupe-grey); color: var(--soft-blush); padding: 15px 30px;">
+            <button class="btn-primary" onclick="speakFrench('Bonjour! Je m\'appelle Thomas. J\'ai trois animaux à la maison. J\'ai un petit chat noir, un grand chien blanc, et un joli lapin gris qui s\'appelle Max. J\'aime beaucoup mes animaux.')" style="background-color: var(--taupe-grey); color: var(--soft-blush);">
                 🔊 Écouter l'histoire complète
             </button>
         </div>
 
         <div class="quiz-container">
-            <div class="quiz-question"><strong>1. Quel est le prénom du garçon dans l'histoire ?</strong></div>
+            <div class="quiz-question"><strong>1. Quel est le prénom du garçon ?</strong></div>
             <button class="quiz-option" onclick="checkQCMAnswer(this, 'co1', 'wrong')">A) Paul</button>
             <button class="quiz-option" onclick="checkQCMAnswer(this, 'co1', 'correct')">B) Thomas</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co1', 'wrong')">C) Marc</button>
             <div class="feedback-msg" id="co1-feedback"></div>
         </div>
 
@@ -361,79 +387,119 @@
             <div class="quiz-question"><strong>2. Combien d'animaux a-t-il à la maison ?</strong></div>
             <button class="quiz-option" onclick="checkQCMAnswer(this, 'co2', 'wrong')">A) Deux</button>
             <button class="quiz-option" onclick="checkQCMAnswer(this, 'co2', 'correct')">B) Trois</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co2', 'wrong')">C) Quatre</button>
             <div class="feedback-msg" id="co2-feedback"></div>
         </div>
 
         <div class="quiz-container">
             <div class="quiz-question"><strong>3. De quelle couleur est son petit chat ?</strong></div>
             <button class="quiz-option" onclick="checkQCMAnswer(this, 'co3', 'correct')">A) Noir</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co3', 'wrong')">B) Blanc</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co3', 'wrong')">C) Gris</button>
+            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co3', 'wrong')">B) Gris</button>
             <div class="feedback-msg" id="co3-feedback"></div>
         </div>
 
         <div class="quiz-container">
-            <div class="quiz-question"><strong>4. Comment s'appelle son lapin gris ?</strong></div>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co4', 'wrong')">A) Loulou</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co4', 'wrong')">B) Felix</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co4', 'correct')">C) Max</button>
+            <div class="quiz-question"><strong>4. Comment s'appelle son lapin ?</strong></div>
+            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co4', 'wrong')">A) Felix</button>
+            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co4', 'correct')">B) Max</button>
             <div class="feedback-msg" id="co4-feedback"></div>
         </div>
 
         <div class="quiz-container">
-            <div class="quiz-question"><strong>5. Est-ce que Thomas aime ses animaux ?</strong></div>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co5', 'correct')">A) Oui, beaucoup</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co5', 'wrong')">B) Non, pas du tout</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co5', 'wrong')">C) On ne sait pas</button>
+            <div class="quiz-question"><strong>5. De quelle couleur est son grand chien ?</strong></div>
+            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co5', 'correct')">A) Blanc</button>
+            <button class="quiz-option" onclick="checkQCMAnswer(this, 'co5', 'wrong')">B) Marron</button>
             <div class="feedback-msg" id="co5-feedback"></div>
         </div>
     </div>
 
     <div class="page" id="page-4">
         <h2 class="page-title">Compréhension Écrite</h2>
-        <p>Lisez attentivement le texte ci-dessous, puis répondez aux questions :</p>
+        <p>Lisez le texte, puis complétez les activités interactives ci-dessous :</p>
         
         <div class="reading-box">
-            <strong>Texte : Le jardin de Sophie</strong><br>
-            Sophie est une étudiante. Elle a un joli jardin. Dans le jardin, il y a un grand chien marron et un petit oiseau bleu. L'oiseau chante sur l'arbre et le chien joue avec une balle. Sophie adore passer du temps avec ses animaux dans le jardin.
+            <strong>Texte : Le chien de Sophie</strong><br>
+            Sophie a un grand chien marron qui s'appelle Max. Max adore jouer dans le jardin avec une petite balle rouge. L'après-midi, il dort dans son panier dans la cuisine. Sophie aime beaucoup donner des biscuits à Max.
         </div>
 
-        <div class="quiz-container">
-            <div class="quiz-question"><strong>1. Qui est Sophie ?</strong></div>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'ce1', 'wrong')">A) Une professeure</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'ce1', 'correct')">B) Une étudiante</button>
-            <div class="feedback-msg" id="ce1-feedback"></div>
-        </div>
+        <h3 style="font-size:1.1rem; margin-top:20px;">1. Complète le texte (Fill in the blanks) :</h3>
+        <p style="background: #fff; padding: 15px; border-radius: 8px; border: 1px solid var(--pale-slate); line-height: 2;">
+            Max est un grand <input type="text" id="blank-1" class="inline-blank" placeholder="animal..."> marron. 
+            Il aime jouer avec une balle <input type="text" id="blank-2" class="inline-blank" placeholder="couleur...">.
+            Il dort dans la <input type="text" id="blank-3" class="inline-blank" placeholder="pièce...">.
+        </p>
+        <button class="btn-primary" onclick="validateBlanks()" style="padding: 6px 16px; font-size: 0.85rem;">Vérifier les réponses</button>
+        <div class="feedback-msg" id="blanks-feedback"></div>
 
-        <div class="quiz-container">
-            <div class="quiz-question"><strong>2. De quelle couleur est l'oiseau ?</strong></div>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'ce2', 'correct')">A) Bleu</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'ce2', 'wrong')">B) Marron</button>
-            <div class="feedback-msg" id="ce2-feedback"></div>
+        <h3 style="font-size:1.1rem; margin-top:25px;">2. Associe les éléments (Drop-down Match) :</h3>
+        <div>
+            <div class="matching-row">
+                <span>Max joue dans le...</span>
+                <select id="drop-1" class="inline-select">
+                    <option value="">Choisir...</option>
+                    <option value="jardin">jardin</option>
+                    <option value="salon">salon</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <span>Le jouet de Max est une...</span>
+                <select id="drop-2" class="inline-select">
+                    <option value="">Choisir...</option>
+                    <option value="balle">balle</option>
+                    <option value="corde">corde</option>
+                </select>
+            </div>
+            <div class="matching-row">
+                <span>Max dort dans son...</span>
+                <select id="drop-3" class="inline-select">
+                    <option value="">Choisir...</option>
+                    <option value="panier">panier</option>
+                    <option value="lit">lit</option>
+                </select>
+            </div>
         </div>
-
-        <div class="quiz-container">
-            <div class="quiz-question"><strong>3. Où chante l'oiseau ?</strong></div>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'ce3', 'wrong')">A) Dans la maison</button>
-            <button class="quiz-option" onclick="checkQCMAnswer(this, 'ce3', 'correct')">B) Sur l'arbre</button>
-            <div class="feedback-msg" id="ce3-feedback"></div>
-        </div>
+        <button class="btn-primary" onclick="validateDropdowns()" style="padding: 6px 16px; font-size: 0.85rem; margin-top: 10px;">Vérifier les associations</button>
+        <div class="feedback-msg" id="dropdowns-feedback"></div>
     </div>
 
     <div class="page" id="page-5">
-        <h2 class="page-title">Production Écrite</h2>
-        <p>C'est votre tour d'écrire ! Rédigez une phrase simple en français pour décrire votre animal préféré (Ex: J'aime le chat noir).</p>
+        <h2 class="page-title">Production Écrite : Crée ton animal</h2>
+        <p>Remplissez la fiche d'adoption pour créer et décrire votre animal virtuel :</p>
         
-        <div style="margin-top: 30px;">
+        <div style="background: var(--bg); padding: 20px; border-radius: 12px; border: 2px solid var(--soft-blush); margin-top: 20px;">
+            <div class="row-grid-2">
+                <div class="form-group">
+                    <label>Nom de l'animal :</label>
+                    <input type="text" placeholder="Ex: Bella">
+                </div>
+                <div class="form-group">
+                    <label>Âge :</label>
+                    <input type="text" placeholder="Ex: 2 ans">
+                </div>
+            </div>
+            <div class="row-grid-2">
+                <div class="form-group">
+                    <label>Animal :</label>
+                    <select>
+                        <option>Choisir...</option>
+                        <option>Un chat 🐈‍⬛</option>
+                        <option>Un chien 🐕</option>
+                        <option>Un oiseau 🐦</option>
+                        <option>Un lapin 🐇</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Couleur :</label>
+                    <input type="text" placeholder="Ex: blanc et noir">
+                </div>
+            </div>
             <div class="form-group">
-                <label for="pe-input">Votre phrase en français :</label>
-                <input type="text" id="pe-input" placeholder="Écrivez votre phrase ici...">
+                <label>J'aime mon animal parce que... (Écris une phrase complète) :</label>
+                <input type="text" id="pe-phrase" placeholder="Ex: Il est très gentil et beau.">
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button onclick="validateProductionEcrite()">Valider ma phrase</button>
+            <div style="text-align: center; margin-top: 15px;">
+                <button class="btn-primary" onclick="validateProductionEcrite()">Créer ma fiche</button>
             </div>
-            <div class="feedback-msg" id="pe-feedback" style="text-align: center; margin-top: 15px; font-size: 1.1rem;"></div>
+            <div class="feedback-msg" id="pe-feedback" style="text-align: center;"></div>
         </div>
     </div>
 
@@ -457,8 +523,8 @@
     </div>
 
     <div class="controls" id="controls-section" style="display: none;">
-        <button id="prevBtn" onclick="changePage(-1)" style="background-color: var(--cool-steel);">⬅ Précédent</button>
-        <button id="nextBtn" onclick="changePage(1)">Suivant ➡</button>
+        <button id="prevBtn" onclick="changePage(-1)" style="background-color: var(--cool-steel); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:bold;">⬅ Précédent</button>
+        <button id="nextBtn" onclick="changePage(1)" style="background-color: var(--old-rose); color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer; font-weight:bold;">Suivant ➡</button>
     </div>
 </div>
 
@@ -509,7 +575,6 @@
             let utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'fr-FR'; 
             utterance.rate = 0.82; 
-            utterance.pitch = 1;
             window.speechSynthesis.speak(utterance);
         } else {
             alert("Votre navigateur ne supporte pas la synthèse vocale.");
@@ -534,14 +599,50 @@
         answeredQuestions[questionId] = true;
     }
 
+    function validateBlanks() {
+        if(answeredQuestions['blanks']) return;
+        const b1 = document.getElementById('blank-1').value.trim().toLowerCase();
+        const b2 = document.getElementById('blank-2').value.trim().toLowerCase();
+        const b3 = document.getElementById('blank-3').value.trim().toLowerCase();
+        const feedback = document.getElementById('blanks-feedback');
+
+        if(b1 === 'chien' && b2 === 'rouge' && b3 === 'cuisine') {
+            feedback.innerHTML = "✅ Excellent ! Tous les blancs sont corrects (+15 pts).";
+            feedback.style.color = "var(--success)";
+            updateScore(15);
+            answeredQuestions['blanks'] = true;
+        } else {
+            feedback.innerHTML = "❌ Certaines réponses sont incorrectes. Réessayez ! (Aide : chien, rouge, cuisine)";
+            feedback.style.color = "var(--error)";
+        }
+    }
+
+    function validateDropdowns() {
+        if(answeredQuestions['dropdowns']) return;
+        const d1 = document.getElementById('drop-1').value;
+        const d2 = document.getElementById('drop-2').value;
+        const d3 = document.getElementById('drop-3').value;
+        const feedback = document.getElementById('dropdowns-feedback');
+
+        if(d1 === 'jardin' && d2 === 'balle' && d3 === 'panier') {
+            feedback.innerHTML = "✅ Superbe ! Les associations sont parfaites (+15 pts).";
+            feedback.style.color = "var(--success)";
+            updateScore(15);
+            answeredQuestions['dropdowns'] = true;
+        } else {
+            feedback.innerHTML = "❌ Vérifiez vos sélections et réessayez !";
+            feedback.style.color = "var(--error)";
+        }
+    }
+
     function validateProductionEcrite() {
-        const input = document.getElementById('pe-input').value.trim();
+        const input = document.getElementById('pe-phrase').value.trim();
         const feedback = document.getElementById('pe-feedback');
         if(input.length < 5) {
-            feedback.innerHTML = "❌ Veuillez écrire une phrase complète en français.";
+            feedback.innerHTML = "❌ Veuillez écrire une phrase complète pour valider la fiche.";
             feedback.style.color = "var(--error)";
         } else {
-            feedback.innerHTML = "🎉 Magnifique ! Votre réponse a été enregistrée avec succès.";
+            feedback.innerHTML = "🎉 Fiche d'adoption créée avec succès ! (+10 pts)";
             feedback.style.color = "var(--success)";
             updateScore(10);
         }
