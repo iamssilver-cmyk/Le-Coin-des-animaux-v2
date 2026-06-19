@@ -290,6 +290,39 @@
         .btn-vrai:hover, .btn-faux:hover { transform: translateY(-2px); opacity: 0.95; }
         .btn-vrai:disabled, .btn-faux:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
+        /* ستايل صفحة التقييم والنتائج النهائية المودرن */
+        .results-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--neo-shadow);
+            margin-top: 25px;
+            border: 1px solid rgba(166, 188, 201, 0.2);
+        }
+        .result-stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(166,188,201,0.15);
+        }
+        .result-stat-item:last-child { border-bottom: none; }
+        .stat-label { font-size: 1.1rem; font-weight: 600; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; padding: 4px 14px; border-radius: 10px; }
+        .stat-success { background: rgba(46, 125, 50, 0.1); color: var(--success); }
+        .stat-error { background: rgba(198, 40, 40, 0.1); color: var(--error); }
+        .teacher-note {
+            background: rgba(62, 75, 142, 0.05);
+            border: 1px dashed var(--french-blue);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: var(--french-blue);
+            font-weight: 600;
+            text-align: center;
+        }
+
         .controls { display: flex; justify-content: flex-end; margin-top: 40px; }
         .score-board { text-align: center; margin-top: 30px; font-size: 1.35rem; font-weight: 800; color: var(--midnight-violet); }
         .score-value { background: var(--midnight-violet); color: var(--seashell); padding: 8px 24px; border-radius: 100px; font-weight: 900; }
@@ -318,10 +351,11 @@
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
+        <div class="dot"></div>
     </div>
 
     <div class="score-board" id="score-section" style="display: none;">
-        Score global : <span class="score-value" id="global-score">0</span>
+        Score actuel : <span class="score-value" id="global-score">0</span>
     </div>
 
     <!-- Page 0: Identification -->
@@ -494,7 +528,7 @@
         <p style="margin-top: 45px; color:#6e5d69; font-size: 1.05rem;">2. Présentez votre animal préféré à voix haute :</p>
         <div style="text-align: center; background: #ffffff; padding: 45px 30px; border-radius: 24px; border: 2px dashed rgba(62, 75, 142, 0.3); box-shadow: var(--neo-shadow);">
             <span style="font-size: 3.5rem; display:block; margin-bottom: 20px;">🎙️</span>
-            <button class="btn-primary" onclick="alert('Simulation d\'enregistrement demarree... Parlez maintenant !')">Commencer l'enregistrement</button>
+            <button class="btn-primary" onclick="alert('Simulation d\'enregistrement démarrée... Parlez maintenant !')">Commencer l'enregistrement</button>
             <div style="margin-top: 20px; font-size: 0.95rem; color: #6e5d69; font-style: italic;">
                 Utilisez les expressions : <em>Il s'appelle... / Il a... ans / Il aime manger...</em>
             </div>
@@ -579,6 +613,53 @@
         </div>
     </div>
 
+    <!-- Page 7: الصفحة الأخيرة - عرض النتيجة التلقائية وعدد الأخطاء -->
+    <div class="page" id="page-7">
+        <h2 class="page-title">Résultats Finaux 📊</h2>
+        <p style="color: #6e5d69; font-size: 1.1rem; margin-bottom: 25px;">
+            Merci <span id="summary-student-name" style="font-weight:700; color:var(--french-blue);"></span> (<span id="summary-student-id"></span>). Voici le bilan de vos compétences interactives :
+        </p>
+
+        <div class="results-card">
+            <div class="result-stat-item">
+                <span class="stat-label">🎧 Compréhension Orale (Score) :</span>
+                <span class="stat-value stat-success" id="res-co-score">0 / 50</span>
+            </div>
+            <div class="result-stat-item">
+                <span class="stat-label">❌ Erreurs en Compréhension Orale :</span>
+                <span class="stat-value stat-error" id="res-co-errors">0</span>
+            </div>
+            <div class="result-stat-item">
+                <span class="stat-label">📖 Compréhension Écrite (Score) :</span>
+                <span class="stat-value stat-success" id="res-ce-score">0 / 30</span>
+            </div>
+            <div class="result-stat-item">
+                <span class="stat-label">❌ Erreurs en Compréhension Écrite :</span>
+                <span class="stat-value stat-error" id="res-ce-errors">0</span>
+            </div>
+            <div class="result-stat-item">
+                <span class="stat-label">⭐ Activité Spéciale (Score) :</span>
+                <span class="stat-value stat-success" id="res-vf-score">0 / 30</span>
+            </div>
+            <div class="result-stat-item">
+                <span class="stat-label">❌ Erreurs en Activité Spéciale :</span>
+                <span class="stat-value stat-error" id="res-vf-errors">0</span>
+            </div>
+            <div style="border-top: 2px solid rgba(166,188,201,0.3); margin-top:20px; padding-top:20px;" class="result-stat-item">
+                <span class="stat-label" style="font-size:1.3rem; font-weight:800;">🎯 Score Global Automatique :</span>
+                <span class="stat-value" id="res-total-score" style="background: var(--midnight-violet); color:#fff; font-size:1.2rem;">0 / 110</span>
+            </div>
+        </div>
+
+        <div class="teacher-note">
+            ⚠️ <strong>Remarque importante :</strong> Les sections de <em>Production Orale (🗣️)</em> et <em>Production Écrite (✍️)</em> sont enregistrées et seront évaluées manuellement par votre professeure ultérieurement.
+        </div>
+        
+        <div style="text-align: center; margin-top: 35px;">
+            <button class="btn-primary" onclick="window.print()">🖨️ Imprimer mon rapport</button>
+        </div>
+    </div>
+
     <!-- Controls section -->
     <div class="controls" id="controls-section" style="display: none;">
         <button id="nextBtn" onclick="changePage(1)" class="btn-primary">Suivant ➡</button>
@@ -587,9 +668,12 @@
 
 <script>
     let currentPage = 0;
-    const totalPages = 7;
-    let totalScore = 0;
+    const totalPages = 8; // تم زيادة عدد الصفحات لتشمل صفحة النتائج
     let audioAttempts = 3;
+    
+    // كائنات لتتبع دقيق للإجابات والأخطاء لكل قسم
+    let scores = { co: 0, ce: 0, vf: 0 };
+    let errors = { co: 0, ce: 0, vf: 0 };
     let answeredQuestions = {};
 
     function goToPage(index) {
@@ -602,9 +686,15 @@
         document.getElementById(`page-${currentPage}`).classList.add('active');
         document.querySelectorAll('.dot')[currentPage].classList.add('active');
         
+        // إظهار أو إخفاء التحكم بالسكور
         if (currentPage === 0) {
             document.getElementById('controls-section').style.display = 'none';
             document.getElementById('score-section').style.display = 'none';
+        } else if (currentPage === 7) {
+            // عند الوصول لصفحة النتائج، يتم حساب وعرض البيانات فوراً
+            calculateFinalResults();
+            document.getElementById('controls-section').style.display = 'none';
+            document.getElementById('score-section').style.display = 'block';
         } else {
             document.getElementById('controls-section').style.display = 'flex';
             document.getElementById('score-section').style.display = 'block';
@@ -618,7 +708,7 @@
             const name = document.getElementById('student-name').value.trim();
             const id = document.getElementById('student-id').value.trim();
             if (!name || !id) {
-                alert("Veuillez entrer votre nom et votre numero universitaire pour continuer.");
+                alert("Veuillez entrer votre nom et votre numéro universitaire pour continuer.");
                 return;
             }
         }
@@ -627,17 +717,14 @@
 
     function playAudioWithLimit() {
         if (audioAttempts <= 0) return;
-        
         audioAttempts--;
         document.getElementById('audio-count').innerText = audioAttempts;
-        
         speakFrench("Bonjour! Je m'appelle Thomas. J'ai trois animaux à la maison. J'ai un petit chat noir, un grand chien blanc, et un joli lapin gris qui s'appelle Max. J'aime beaucoup mes animaux.");
-        
         if (audioAttempts === 0) {
             const btn = document.getElementById('audio-btn');
             btn.disabled = true;
             btn.style.background = "var(--powder-blue)";
-            btn.innerText = "❌ Audio bloque (0 tentatives)";
+            btn.innerText = "❌ Audio bloqué (0 tentatives)";
         }
     }
 
@@ -651,6 +738,7 @@
         }
     }
 
+    // تصحيح القسم الأول: Compréhension Orale
     function checkQCMAnswer(element, questionId, status) {
         if (answeredQuestions[questionId]) return;
         const feedbackElement = document.getElementById(`${questionId}-feedback`);
@@ -660,15 +748,18 @@
             element.style.borderColor = "var(--success)";
             feedbackElement.innerHTML = "✅ Bravo! C'est correct.";
             feedbackElement.style.color = "var(--success)";
-            updateScore(10);
+            scores.co += 10;
         } else {
             element.style.borderColor = "var(--error)";
-            feedbackElement.innerHTML = "❌ Desole, mauvaise reponse !";
+            feedbackElement.innerHTML = "❌ Désolé, mauvaise réponse !";
             feedbackElement.style.color = "var(--error)";
+            errors.co += 1;
         }
         answeredQuestions[questionId] = true;
+        updateGlobalScoreDisplay();
     }
 
+    // تصحيح القسم الثاني: Fill in the blanks
     function validateBlanks() {
         if(answeredQuestions['blanks']) return;
         const b1 = document.getElementById('blank-1').value.trim().toLowerCase();
@@ -679,14 +770,17 @@
         if(b1 === 'chien' && b2 === 'rouge' && b3 === 'cuisine') {
             feedback.innerHTML = "✅ Excellent ! Tous les blancs sont corrects (+15 pts).";
             feedback.style.color = "var(--success)";
-            updateScore(15);
+            scores.ce += 15;
             answeredQuestions['blanks'] = true;
         } else {
-            feedback.innerHTML = "❌ Certaines reponses sont incorrectes. Reessayez !";
+            feedback.innerHTML = "❌ Certaines réponses sont incorrectes. Réessayez !";
             feedback.style.color = "var(--error)";
+            errors.ce += 1; // تحسب غلطة للمحاولة الخاطئة
         }
+        updateGlobalScoreDisplay();
     }
 
+    // تصحيح القوائم المنسدلة
     function validateDropdowns() {
         if(answeredQuestions['dropdowns']) return;
         const d1 = document.getElementById('drop-1').value;
@@ -697,12 +791,14 @@
         if(d1 === 'jardin' && d2 === 'balle' && d3 === 'panier') {
             feedback.innerHTML = "✅ Superbe ! Les associations sont parfaites (+15 pts).";
             feedback.style.color = "var(--success)";
-            updateScore(15);
+            scores.ce += 15;
             answeredQuestions['dropdowns'] = true;
         } else {
-            feedback.innerHTML = "❌ Verifiez vos selections et reessayez !";
+            feedback.innerHTML = "❌ Vérifiez vos sélections et réessayez !";
             feedback.style.color = "var(--error)";
+            errors.ce += 1;
         }
+        updateGlobalScoreDisplay();
     }
 
     function validateProductionEcrite() {
@@ -710,16 +806,16 @@
         const input = document.getElementById('pe-phrase').value.trim();
         const feedback = document.getElementById('pe-feedback');
         if(input.length < 5) {
-            feedback.innerHTML = "❌ Veuillez ecrire une phrase complete pour valider la fiche.";
+            feedback.innerHTML = "❌ Veuillez écrire une phrase complète pour valider la fiche.";
             feedback.style.color = "var(--error)";
         } else {
-            feedback.innerHTML = "🎉 Fiche d'adoption creee avec succes ! (+10 pts)";
+            feedback.innerHTML = "🎉 Fiche d'adoption créée avec succès ! Sent pour correction.";
             feedback.style.color = "var(--success)";
-            updateScore(10);
             answeredQuestions['pe'] = true;
         }
     }
 
+    // تصحيح النشاط الخاص: Vrai ou Faux
     function checkVF(button, id, result) {
         if (answeredQuestions[id]) return;
         const feedback = document.getElementById(`${id}-feedback`);
@@ -727,10 +823,11 @@
         if (result === 'vrai') {
             feedback.innerHTML = "✅ Correct ! Bonne analyse.";
             feedback.style.color = "var(--success)";
-            updateScore(10);
+            scores.vf += 10;
         } else {
             feedback.innerHTML = "❌ Incorrect ! Pensez à revoir le vocabulaire.";
             feedback.style.color = "var(--error)";
+            errors.vf += 1;
         }
         answeredQuestions[id] = true;
         
@@ -738,11 +835,32 @@
         const buttons = container.getElementsByTagName('button');
         buttons[0].disabled = true;
         buttons[1].disabled = true;
+        updateGlobalScoreDisplay();
     }
 
-    function updateScore(points) {
-        totalScore += points;
-        document.getElementById('global-score').innerText = totalScore;
+    function updateGlobalScoreDisplay() {
+        let currentTotal = scores.co + scores.ce + scores.vf;
+        document.getElementById('global-score').innerText = currentTotal;
+    }
+
+    // دالة حساب وعرض تفاصيل لوحة النتائج النهائية المودرن
+    function calculateFinalResults() {
+        document.getElementById('summary-student-name').innerText = document.getElementById('student-name').value;
+        document.getElementById('summary-student-id').innerText = document.getElementById('student-id').value;
+
+        // عرض درجات كل مهارة تفاعلية
+        document.getElementById('res-co-score').innerText = `${scores.co} / 50`;
+        document.getElementById('res-ce-score').innerText = `${scores.ce} / 30`;
+        document.getElementById('res-vf-score').innerText = `${scores.vf} / 30`;
+
+        // عرض عدد الأخطاء المرتكبة بدقة
+        document.getElementById('res-co-errors').innerText = errors.co;
+        document.getElementById('res-ce-errors').innerText = errors.ce;
+        document.getElementById('res-vf-errors').innerText = errors.vf;
+
+        // المجموع الكلي التلقائي المتاح
+        let finalTotal = scores.co + scores.ce + scores.vf;
+        document.getElementById('res-total-score').innerText = `${finalTotal} / 110`;
     }
 </script>
 
