@@ -6,41 +6,40 @@
     <title>Le Coin des Animaux - FLE A1</title>
     <style>
         :root {
-            --primary: #1e3a8a;      
-            --primary-light: #3b82f6;
-            --accent: #06b6d4;       
-            --bg: #f8fafc;           
-            --card-bg: #ffffff;
-            --text: #0f172a;
-            --success: #10b981;
+            --soft-blush: #FFDBDA;   
+            --old-rose: #DB7F8E;     
+            --pale-slate: #D5C5C8;   
+            --cool-steel: #9DA3A4;   
+            --taupe-grey: #604D53;   
+            --bg: #FDF8F8;           
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--taupe-grey);
             margin: 0;
             padding: 20px;
             direction: ltr;
         }
 
-        header {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-
-        header h1 { margin: 0; font-size: 2.5rem; }
-        header p { margin: 10px 0 0 0; opacity: 0.9; font-style: italic; }
-
         .container {
             max-width: 1000px;
             margin: 0 auto;
         }
+
+        header {
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, var(--taupe-grey), var(--cool-steel));
+            color: var(--soft-blush);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgb(96 77 83 / 0.15);
+        }
+
+        header h1 { margin: 0; font-size: 2.6rem; letter-spacing: 1px; }
+        header p { margin: 10px 0 0 0; opacity: 0.9; font-style: italic; }
 
         .grid {
             display: grid;
@@ -50,56 +49,64 @@
         }
 
         .animal-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 25px 20px;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-            border: 1px solid #e2e8f0;
-            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgb(96 77 83 / 0.05);
+            border: 2px solid var(--soft-blush);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .animal-card:hover {
             transform: translateY(-5px);
+            border-color: var(--old-rose);
         }
 
         .animal-emoji {
             font-size: 4rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: block;
         }
 
+        .animal-card h3 {
+            color: var(--taupe-grey);
+            margin: 10px 0 15px 0;
+        }
+
         button {
-            background-color: var(--accent);
+            background-color: var(--old-rose);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
-            transition: background 0.2s;
+            font-size: 0.95rem;
+            transition: background 0.2s, transform 0.1s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 2px 4px rgb(219 127 142 / 0.2);
         }
 
         button:hover {
-            background-color: #0891b2;
+            background-color: #c96b7a;
+            transform: scale(1.02);
         }
 
         .activity-section {
-            background: var(--card-bg);
+            background: #ffffff;
             border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgb(96 77 83 / 0.06);
+            border: 1px solid var(--pale-slate);
             margin-top: 30px;
         }
 
         .activity-title {
-            color: var(--primary);
-            border-bottom: 3px solid var(--accent);
+            color: var(--taupe-grey);
+            border-bottom: 3px solid var(--soft-blush);
             padding-bottom: 10px;
             margin-top: 0;
         }
@@ -108,27 +115,35 @@
             display: block;
             width: 100%;
             text-align: left;
-            background: #f1f5f9;
-            color: var(--text);
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            background: var(--bg);
+            color: var(--taupe-grey);
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid var(--pale-slate);
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            transition: all 0.2s;
         }
 
         .quiz-option:hover {
-            background: #e2e8f0;
+            background: var(--soft-blush);
+            border-color: var(--old-rose);
         }
 
         .score-board {
             display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 5px 15px;
+            background: var(--taupe-grey);
+            color: var(--soft-blush);
+            padding: 6px 18px;
             border-radius: 20px;
             font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        #feedback {
+            font-weight: bold;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -140,8 +155,7 @@
         <p>Niveau FLE A1 - Pour les étudiants universitaires</p>
     </header>
 
-    <!-- تم تعديل العنوان هنا ليكون بالفرنسية بالكامل -->
-    <h2 style="color: var(--primary);">1. Vocabulaire & Prononciation (Cliquez pour écouter)</h2>
+    <h2 style="color: var(--taupe-grey); font-size: 1.5rem; margin-bottom: 20px;">1. Vocabulaire & Prononciation (Cliquez pour écouter)</h2>
     <div class="grid">
         <div class="animal-card">
             <span class="animal-emoji">🐈‍⬛</span>
@@ -167,16 +181,16 @@
 
     <div class="activity-section">
         <h2 class="activity-title">2. Activité de Compréhension Orale <span class="score-board" id="score">Score: 0</span></h2>
-        <p>Cliquez sur le bouton pour écouter le mot, puis choisissez la bonne réponse :</p>
+        <p style="color: var(--cool-steel); font-weight: 500;">Cliquez sur le bouton pour écouter le mot, puis choisissez la bonne réponse :</p>
         
-        <button onclick="playQuizAudio()" style="background-color: var(--primary); margin-bottom: 20px;">🔊 Écouter la question</button>
+        <button onclick="playQuizAudio()" style="background-color: var(--taupe-grey); color: var(--soft-blush); margin-bottom: 20px;">🔊 Écouter la question</button>
         
         <div id="options-container">
             <button class="quiz-option" onclick="checkAnswer('Le chien')">A) Le chien</button>
             <button class="quiz-option" onclick="checkAnswer('Le chat')">B) Le chat</button>
             <button class="quiz-option" onclick="checkAnswer('L\'oiseau')">C) L'oiseau</button>
         </div>
-        <p id="feedback" style="font-weight: bold; margin-top: 15px;"></p>
+        <p id="feedback"></p>
     </div>
 </div>
 
@@ -207,7 +221,7 @@
         const feedback = document.getElementById('feedback');
         if (selected === currentQuizWord) {
             feedback.innerHTML = "✅ Bravo! C'est correct.";
-            feedback.style.color = "var(--success)";
+            feedback.style.color = "#2e7d32"; 
             score += 10;
             document.getElementById('score').innerText = "Score: " + score;
             
@@ -215,7 +229,7 @@
             currentQuizWord = words[Math.floor(Math.random() * words.length)];
         } else {
             feedback.innerHTML = "❌ Désolé, essayez encore !";
-            feedback.style.color = "#ef4444";
+            feedback.style.color = "#c62828"; 
         }
     }
 </script>
